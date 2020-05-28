@@ -1,4 +1,4 @@
-package arraysAndStrings;
+package arraysandstrings;
 
 
 class Node<K,V>{

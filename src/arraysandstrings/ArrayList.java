@@ -1,6 +1,4 @@
-package arraysAndStrings;
-
-import java.lang.reflect.Array;
+package arraysandstrings;
 
 /**
  * Implementing my own array-list
