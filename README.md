@@ -14,4 +14,9 @@ structures.
 
 - HashTable
 - Array List
+- String Builder
+
+### Chapter 2 Linked Lists
+
+- Singly Linked List
 
