@@ -58,6 +58,18 @@ public class ArrayList<E> {
 
         tryResize();
 
+        // move everything over to the right
+        E prev = (E) this.store[index];
+
+        for(int i = index + 1; i < this.store.length - 1; i++){
+            // break out cause we don't need to shift over 1
+            if(this.store[i] == null)
+                break;
+
+            prev = (E)this.store[i];
+            this.store[i] = prev;
+        }
+
         this.store[index] = element;
 
         this.size ++;
@@ -147,6 +159,21 @@ public class ArrayList<E> {
         for(char i='a' ; i <= 'z'; i++){
             strs.remove("" + i);
         }
+
+        System.out.println(strs);
+
+        // custom index insertion
+        strs.add("hello");
+
+        strs.add("rut-roh-raggy");
+
+        strs.add("something isn't");
+
+        strs.add("quite right");
+
+        strs.add("oh no");
+
+        strs.add(1,"world");
 
         System.out.println(strs);
     }
