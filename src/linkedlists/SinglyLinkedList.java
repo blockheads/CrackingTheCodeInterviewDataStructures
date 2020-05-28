@@ -70,6 +70,24 @@ public class SinglyLinkedList<T> {
         return null;
     }
 
+    // deletes a specific value from the linked list
+    public boolean delete(T value){
+        Node<T> curr = head;
+        Node<T> prev = null;
+
+        while(curr != null){
+
+            if(curr.getValue().equals(value) && prev != null){
+                prev.next = curr.next;
+            }
+
+            prev = curr;
+            curr = curr.next;
+        }
+
+        return false;
+    }
+
     public String toString(){
 
         Node<T> curr = head;
@@ -100,5 +118,11 @@ public class SinglyLinkedList<T> {
         // get d
 
         System.out.println(l.get('d').getValue());
+
+        // delete c
+
+        l.delete('c');
+
+        System.out.println(l);
     }
 }
