@@ -1,7 +1,5 @@
 package arraysAndStrings;
 
-import java.util.ArrayList;
-
 class Node<K,V>{
 
     K key;
@@ -50,8 +48,8 @@ public class HashTable<K,V> {
             }
 
             // store previous values back in
-            for(Node<K,V> node : temp){
-
+            for(int i =0; i<temp.size(); i++){
+                Node<K,V> node = temp.get(i);
                 // have to make sure we include bucketed value
                 while(node != null){
                     this.put(node.key, node.value);
@@ -152,7 +150,8 @@ public class HashTable<K,V> {
     public String toString(){
         StringBuilder str = new StringBuilder();
         str.append("{\n");
-        for(Node<K,V> node : this.hashes){
+        for(int i=0; i < this.hashes.size(); i++){
+            Node<K,V> node = this.hashes.get(i);
             if(node != null)
                 str.append(node.key).append(": ").append(node.value).append("\n");
         }
@@ -206,7 +205,6 @@ public class HashTable<K,V> {
 
 
         }
-
 
         System.out.println(map);
 

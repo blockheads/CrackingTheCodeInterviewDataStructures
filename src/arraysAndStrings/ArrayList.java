@@ -130,6 +130,10 @@ public class ArrayList<E> {
         return str.toString();
     }
 
+    public void set(int index, E element){
+        this.store[index] = element;
+    }
+
     public static void main(String[] args){
 
         ArrayList<String> strs = new ArrayList<>();
