@@ -115,7 +115,7 @@ public class ArrayList<E> {
     }
 
     private boolean shouldResize(){
-        return (1.0 * size)/ store.length > 0.7;
+        return size == store.length;
     }
 
     public String toString(){
