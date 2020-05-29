@@ -16,6 +16,11 @@ public class StringBuilder {
         return this;
     }
 
+	public StringBuilder prepend(Object word){
+		this.insert(list.size() - 1, word.toString());
+		return this;
+	}
+
     public void insert(int index, String word){
         list.add(index, word);
     }

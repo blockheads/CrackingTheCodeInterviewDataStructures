@@ -21,3 +21,11 @@ structures.
 - Singly Linked List
 - Doubly Linked List
 
+### Chapter 3 Stacks and Queues
+
+- Stack
+- Queue
+
+### Chapter 4 Trees and Graphs
+
+- Binary Tree
