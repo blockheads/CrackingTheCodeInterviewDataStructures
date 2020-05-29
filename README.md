@@ -19,4 +19,5 @@ structures.
 ### Chapter 2 Linked Lists
 
 - Singly Linked List
+- Doubly Linked List
 
