@@ -59,6 +59,58 @@ public class BinaryTree<T extends Comparable<T>>{
 		return current;
 	}
 
+	public void delete(T value){	
+		this.root = this.deleteRecursive(this.root, value);
+	}
+
+	public BinaryNode<T> getMin(BinaryNode<T> node){
+		while(node.left != null){
+			node = node.left;
+		}
+		return node;
+	}
+
+	public BinaryNode<T> deleteRecursive(BinaryNode<T> curr, T value){
+	
+		if(curr == null)
+			return null;
+	
+		System.out.println("curr value: " + curr.value + " looking for: " + value );
+		System.out.println("curr.value.compareTo(value): " + curr.value.compareTo(value));
+					
+		if(value.compareTo(curr.value) > 0){
+			curr.right = deleteRecursive(curr.right, value);
+		}
+		else if(value.compareTo(curr.value) < 0)
+			curr.left = deleteRecursive(curr.left, value);
+		else{	
+			System.out.println("found match");	
+			// no children 
+			if(curr.left == null && curr.right == null){
+				return null;
+			}
+			// single right child				
+			else if(curr.left == null){
+				return curr.right;
+			}
+			// single left child
+			else if(curr.right == null){
+				return curr.left;
+			}
+			// both children
+			// get minimum value from the right
+			// set that as our new nodes value
+			// delete the value we stole from the right
+			else{
+				BinaryNode<T> min = this.getMin(curr.right);
+				curr.value = min.value;
+				curr.right = deleteRecursive(curr.right, min.value);
+			}
+		}
+		return curr;
+	
+	}
+
 	public void inOrder(){
 		this.inOrderRecursive(this.root);
 	}
@@ -157,5 +209,21 @@ public class BinaryTree<T extends Comparable<T>>{
 
 		System.out.println("\n---\n");
 
+		// deletion
+		tree.delete(6);
+		
+		System.out.println(tree);
+
+		tree.delete(7);
+
+		System.out.println(tree);
+
+		tree.delete(5);
+		
+		System.out.println(tree);
+
+		tree.delete(10);
+
+		System.out.println(tree);
 	}
 }
