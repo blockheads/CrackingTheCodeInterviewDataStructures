@@ -63,13 +63,82 @@ public class BinaryTree<T extends Comparable<T>>{
 		this.root = this.deleteRecursive(this.root, value);
 	}
 
-	public BinaryNode<T> getMin(BinaryNode<T> node){
+	public void deleteI(T value){
+		this.root = this.deleteIterative(this.root, value);
+	}
+
+	private BinaryNode<T> getMin(BinaryNode<T> node){
 		while(node.left != null){
 			node = node.left;
 		}
 		return node;
 	}
+	
+	private void removeParent(BinaryNode<T> parent, boolean left_child, BinaryNode<T> node){
+		if(left_child)
+			parent.left = node;
+		else
+			parent.right = node;
+	}
 
+	// iterative node deletion
+	private BinaryNode<T> deleteIterative(BinaryNode<T> root, T value){
+		BinaryNode<T> curr = root;
+		BinaryNode<T> parent = null;
+		boolean left_child = false;		
+		
+		while(!curr.value.equals(value)){
+			if(value.compareTo(curr.value) > 0){
+				parent = curr;
+				curr = curr.right;
+				left_child = false;
+			}
+			else if(value.compareTo(curr.value) < 0){
+				parent = curr;
+				curr = curr.left;
+				left_child = true;
+			}
+
+		}
+
+		System.out.println("deleteing " + curr.value);	
+		boolean deleting = true;
+		while(deleting){
+
+			// no children
+			if(curr.left == null && curr.right == null){
+				this.removeParent(parent, left_child, null);
+				deleting = false;
+			}
+			// right child
+			else if(curr.left == null){
+				this.removeParent(parent, left_child, curr.right);
+				deleting = false;
+			}
+			// left child
+			else if(curr.right == null){
+				this.removeParent(parent, left_child, curr.left);	
+				deleting = false;
+			}
+			// both children
+			else{
+				// get min val from right subtree
+				BinaryNode<T> min = getMin(curr.right);
+				// set our value to this min value
+				curr.value = min.value;
+
+				// delete min node from the tree
+				parent = curr;
+				curr = curr.right;
+				left_child = false;				
+			}
+									
+
+		}
+
+		return root;			
+	}
+	
 	public BinaryNode<T> deleteRecursive(BinaryNode<T> curr, T value){
 	
 		if(curr == null)
@@ -223,6 +292,20 @@ public class BinaryTree<T extends Comparable<T>>{
 		System.out.println(tree);
 
 		tree.delete(10);
+
+		System.out.println(tree);
+
+		// iterative deletion
+
+		tree.deleteI(25);
+
+		System.out.println(tree);
+
+		tree.deleteI(8);
+
+		System.out.println(tree);
+	
+		tree.deleteI(12);	
 
 		System.out.println(tree);
 	}
