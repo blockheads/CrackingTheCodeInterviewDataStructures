@@ -222,6 +222,43 @@ public class BinaryTree<T extends Comparable<T>>{
 		this.postOrderRecursive(node.right);
 		
 	}
+
+	public String BuildTreeI(){
+		StringBuilder str = new StringBuilder();
+		
+		BinaryNode<T> curr = this.root;
+		BinaryNode<T> prev = null;
+	
+		if(this.root == null)
+			return str.toString();
+
+		while(curr != null){
+	
+			if(curr.left == null){
+				str.append(curr.value).append("\n");	
+				curr = curr.right;
+			}
+			else{
+				
+				prev = curr.left;
+				while(prev.right != null && prev.right != curr){
+					prev = prev.right;
+				}
+
+				if(prev.right == null){
+					str.append(curr.value).append("\n");
+					prev.right = curr;
+					curr = curr.left;
+				}
+				else{
+					prev.right = null;
+					curr = curr.right;
+				}
+			}
+		}
+
+		return str.toString();
+	}
 	
 	// recursive method to build the tree output
 	public void BuildTreeR(StringBuilder str, BinaryNode<T> node, int depth, int size){
@@ -308,5 +345,17 @@ public class BinaryTree<T extends Comparable<T>>{
 		tree.deleteI(12);	
 
 		System.out.println(tree);
+
+		// morris traversal
+		
+		tree.add(7);
+		tree.add(20);
+		tree.add(14);
+		tree.add(3);
+		tree.add(12);
+		
+		System.out.println(tree);
+
+		System.out.println(tree.BuildTreeI());
 	}
 }
